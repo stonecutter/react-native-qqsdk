@@ -124,7 +124,7 @@ public class QQSDK extends ReactContextBaseJavaModule {
     @ReactMethod
     public void checkClientInstalled(Promise promise) {
         Activity currentActivity = getCurrentActivity();
-        if (null == currentActivity) {
+        if (null == mTencent || null == currentActivity) {
             promise.reject("405",ACTIVITY_DOES_NOT_EXIST);
             return;
         }
@@ -139,7 +139,7 @@ public class QQSDK extends ReactContextBaseJavaModule {
     @ReactMethod
     public void logout(Promise promise) {
         Activity currentActivity = getCurrentActivity();
-        if (null == currentActivity) {
+        if (null == mTencent || null == currentActivity) {
             promise.reject("405",ACTIVITY_DOES_NOT_EXIST);
             return;
         }
@@ -150,7 +150,7 @@ public class QQSDK extends ReactContextBaseJavaModule {
     @ReactMethod
     public void ssoLogin(final Promise promise) {
         final Activity currentActivity = getCurrentActivity();
-        if (null == currentActivity) {
+        if (null == mTencent || null == currentActivity) {
             promise.reject("405",ACTIVITY_DOES_NOT_EXIST);
             return;
         }
@@ -168,7 +168,7 @@ public class QQSDK extends ReactContextBaseJavaModule {
     @ReactMethod
     public void shareText(String text,int shareScene, final Promise promise) {
         final Activity currentActivity = getCurrentActivity();
-        if (null == currentActivity) {
+        if (null == mTencent || null == currentActivity) {
             promise.reject("405",ACTIVITY_DOES_NOT_EXIST);
             return;
         }
@@ -214,7 +214,7 @@ public class QQSDK extends ReactContextBaseJavaModule {
     public void shareImage(String image,String title, String description,int shareScene, final Promise promise) {
         final Activity currentActivity = getCurrentActivity();
         Log.d("图片地址",image);
-        if (null == currentActivity) {
+        if (null == mTencent || null == currentActivity) {
             promise.reject("405",ACTIVITY_DOES_NOT_EXIST);
             return;
         }
@@ -277,7 +277,7 @@ public class QQSDK extends ReactContextBaseJavaModule {
     @ReactMethod
     public void shareNews(String url,String image,String title, String description,int shareScene, final Promise promise) {
         final Activity currentActivity = getCurrentActivity();
-        if (null == currentActivity) {
+        if (null == mTencent || null == currentActivity) {
             promise.reject("405",ACTIVITY_DOES_NOT_EXIST);
             return;
         }
@@ -347,7 +347,7 @@ public class QQSDK extends ReactContextBaseJavaModule {
     @ReactMethod
     public void shareAudio(String url,String flashUrl,String image,String title, String description,int shareScene, final Promise promise) {
         final Activity currentActivity = getCurrentActivity();
-        if (null == currentActivity) {
+        if (null == mTencent || null == currentActivity) {
             promise.reject("405",ACTIVITY_DOES_NOT_EXIST);
             return;
         }
@@ -418,7 +418,7 @@ public class QQSDK extends ReactContextBaseJavaModule {
     @ReactMethod
     public void shareVideo(String url,String flashUrl,String image,String title, String description,int shareScene, final Promise promise) {
         final Activity currentActivity = getCurrentActivity();
-        if (null == currentActivity) {
+        if (null == mTencent || null == currentActivity) {
             promise.reject("405",ACTIVITY_DOES_NOT_EXIST);
             return;
         }
@@ -501,6 +501,10 @@ public class QQSDK extends ReactContextBaseJavaModule {
      * @return
      */
     private String processImage(String image) {
+        if (TextUtils.isEmpty(image)) {
+            return null;
+        }
+
         if(URLUtil.isHttpUrl(image) || URLUtil.isHttpsUrl(image)) {
             return saveBitmapToFile(getBitmapFromURL(image));
         } else if (isBase64(image)) {
