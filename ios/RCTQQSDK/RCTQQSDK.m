@@ -60,7 +60,7 @@ RCT_EXPORT_METHOD(checkClientInstalled
     if ([TencentOAuth iphoneQQInstalled] && [TencentOAuth iphoneQQSupportSSOLogin]) {
         resolve(@YES);
     } else {
-        reject(@"404", QQ_NOT_INSTALLED, nil);
+        resolve(@NO);
     }
 }
 
