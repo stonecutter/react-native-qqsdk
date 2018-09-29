@@ -438,10 +438,13 @@ RCT_EXPORT_METHOD(shareVideo:(NSString *)previewUrl
 }
 - (NSDictionary *)makeResultWithUserId:(NSString *)userId
                            accessToken:(NSString *)accessToken
-                        expirationDate:(NSDate *)expirationDate {
+                        expirationDate:(NSDate *)expirationDate
+                        passData:(NSDictionary *)passData
+                         {
     NSDictionary *result = @{ @"userid" : userId,
                               @"access_token" : accessToken,
-                              @"expires_time" : [NSString stringWithFormat:@"%f", [expirationDate timeIntervalSince1970] * 1000] };
+                              @"expires_time" : [NSString stringWithFormat:@"%f", [expirationDate timeIntervalSince1970] * 1000],
+                              @"pass_data" : passData};
     return result;
 }
 - (void)handleOpenURLNotification:(NSNotification *)notification {
@@ -535,7 +538,8 @@ RCT_EXPORT_METHOD(shareVideo:(NSString *)previewUrl
     if (tencentOAuth.accessToken && 0 != [tencentOAuth.accessToken length] && loginResolve) {
         NSDictionary *result = [self makeResultWithUserId:tencentOAuth.openId
                                               accessToken:tencentOAuth.accessToken
-                                           expirationDate:tencentOAuth.expirationDate];
+                                           expirationDate:tencentOAuth.expirationDate
+                                                 passData:tencentOAuth.passData];
         loginResolve(result);
         loginReject = nil;
     } else {
