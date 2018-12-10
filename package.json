@@ -1,20 +1,21 @@
 {
-  "name": "react-native-qqsdk",
-  "version": "0.8.7",
+  "name": "@treenewbie/react-native-qqsdk",
+  "version": "1.0.0",
   "description": "react-native wrapper for qq sdk",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "publish": "npm publish --access=public"
   },
-  "author": "https://github.com/iVanPan",
+  "author": "Sines Lu",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/iVanPan/react-native-qqsdk/issues"
+    "url": "https://github.com/TreeNewbie/react-native-qqsdk/issues"
   },
-  "homepage": "https://github.com/iVanPan/react-native-qqsdk",
+  "homepage": "https://github.com/TreeNewbie/react-native-qqsdk",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/iVanPan/react-native-qqsdk.git"
+    "url": "git+git@github.com:TreeNewbie/react-native-qqsdk.git"
   },
   "keywords": [
     "ecosystem:react-native",
