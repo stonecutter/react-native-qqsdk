@@ -15,7 +15,7 @@ public class QQSDKPackage implements ReactPackage {
     @Override
     public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
         List<NativeModule> modules = new ArrayList<>();
-        modules.add(new QQSDK(reactContext));
+        modules.add(new QQSDKModule(reactContext));
         return modules;
     }
     public List<Class<? extends JavaScriptModule>> createJSModules() {

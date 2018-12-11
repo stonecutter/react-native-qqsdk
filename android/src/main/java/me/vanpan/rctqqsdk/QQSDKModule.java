@@ -57,7 +57,7 @@ class ShareScene {
     public static final int Favorite = 2;
 }
 
-public class QQSDK extends ReactContextBaseJavaModule {
+public class QQSDKModule extends ReactContextBaseJavaModule {
 
     private static Tencent mTencent;
     private String appId;
@@ -89,7 +89,7 @@ public class QQSDK extends ReactContextBaseJavaModule {
         }
     };
 
-    public QQSDK(ReactApplicationContext reactContext) {
+    public QQSDKModule(ReactApplicationContext reactContext) {
         super(reactContext);
         reactContext.addActivityEventListener(mActivityEventListener);
         appId = this.getAppID(reactContext);
@@ -106,7 +106,7 @@ public class QQSDK extends ReactContextBaseJavaModule {
 
     @Override
     public String getName() {
-        return "QQSDK";
+        return "QQSDKModule";
     }
 
     @Override
@@ -472,7 +472,7 @@ public class QQSDK extends ReactContextBaseJavaModule {
             ApplicationInfo appInfo = reactContext.getPackageManager()
                 .getApplicationInfo(reactContext.getPackageName(),
                     PackageManager.GET_META_DATA);
-            String key = appInfo.metaData.get("QQ_APP_ID").toString();
+            String key = appInfo.metaData.get("qqAppID").toString();
             return key;
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();

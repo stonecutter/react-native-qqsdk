@@ -1,17 +1,3 @@
-import groovy.json.JsonSlurper
-
-def computeVersionName() {
-    // dynamically retrieve version from package.json
-    def slurper = new JsonSlurper()
-    def json = slurper.parse(file('../../../package.json'), "utf-8")
-    return json.version
-}
-def computeQQAppId() {
-    // dynamically retrieve qq app id from package.json
-    def slurper = new JsonSlurper()
-    def json = slurper.parse(file('../../../package.json'), "utf-8")
-    return json.qq_app_id
-}
 apply plugin: 'com.android.library'
 
 android {
@@ -22,10 +8,6 @@ android {
         minSdkVersion 16
         targetSdkVersion 24
         versionCode 1
-        versionName computeVersionName()
-        manifestPlaceholders = [
-                QQ_APP_ID: computeQQAppId()
-        ]
     }
     sourceSets.main {
         jniLibs.srcDirs = ['libs']
