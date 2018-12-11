@@ -1,4 +1,4 @@
-declare module 'react-native-qqsdk' {
+declare module '@treenewbie/react-native-qqsdk' {
   enum shareScene {QQ, QQZone, Favorite}
 
   export function isQQClientInstalled(): Promise<boolean>
