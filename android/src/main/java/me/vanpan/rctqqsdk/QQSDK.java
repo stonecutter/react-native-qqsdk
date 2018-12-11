@@ -57,7 +57,7 @@ class ShareScene {
     public static final int Favorite = 2;
 }
 
-public class QQSDKModule extends ReactContextBaseJavaModule {
+public class QQSDK extends ReactContextBaseJavaModule {
 
     private static Tencent mTencent;
     private String appId;
@@ -89,7 +89,7 @@ public class QQSDKModule extends ReactContextBaseJavaModule {
         }
     };
 
-    public QQSDKModule(ReactApplicationContext reactContext) {
+    public QQSDK(ReactApplicationContext reactContext) {
         super(reactContext);
         reactContext.addActivityEventListener(mActivityEventListener);
         appId = this.getAppID(reactContext);
@@ -106,7 +106,7 @@ public class QQSDKModule extends ReactContextBaseJavaModule {
 
     @Override
     public String getName() {
-        return "QQSDKModule";
+        return "QQSDK";
     }
 
     @Override
