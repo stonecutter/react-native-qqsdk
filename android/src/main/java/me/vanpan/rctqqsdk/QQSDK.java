@@ -75,16 +75,14 @@ public class QQSDK extends ReactContextBaseJavaModule {
 
         @Override
         public void onActivityResult(Activity activity, int requestCode, int resultCode, Intent intent) {
-            if (resultCode == Constants.ACTIVITY_OK) {
-                if (requestCode == Constants.REQUEST_LOGIN) {
-                    Tencent.onActivityResultData(requestCode, resultCode, intent, loginListener);
-                }
-                if (requestCode == Constants.REQUEST_QQ_SHARE) {
-                    Tencent.onActivityResultData(requestCode, resultCode, intent, qqShareListener);
-                }
-                if (requestCode == Constants.REQUEST_QQ_FAVORITES) {
-                    Tencent.onActivityResultData(requestCode, resultCode, intent, addToQQFavoritesListener);
-                }
+            if (requestCode == Constants.REQUEST_LOGIN) {
+                Tencent.onActivityResultData(requestCode, resultCode, intent, loginListener);
+            }
+            if (requestCode == Constants.REQUEST_QQ_SHARE) {
+                Tencent.onActivityResultData(requestCode, resultCode, intent, qqShareListener);
+            }
+            if (requestCode == Constants.REQUEST_QQ_FAVORITES) {
+                Tencent.onActivityResultData(requestCode, resultCode, intent, addToQQFavoritesListener);
             }
         }
     };
