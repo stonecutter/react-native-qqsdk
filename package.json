@@ -1,6 +1,6 @@
 {
   "name": "@treenewbie/react-native-qqsdk",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "react-native wrapper for qq sdk",
   "main": "index.js",
   "scripts": {
