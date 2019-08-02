@@ -152,14 +152,14 @@ function addAppIdToGradle() {
 function addFrameworkAndSearchPath() {
   var projectPath = glob.sync("**/project.pbxproj", ignoreNodeModules)[0];
   var project = xcode.project(projectPath);
-  var frameworkPath = path.join(__dirname,'../node_modules/react-native-qqsdk/ios/RCTQQSDK/TencentOpenAPI.framework');
+  var frameworkPath = path.join(__dirname,'../node_modules/@stonecutter/react-native-qqsdk/ios/RCTQQSDK/TencentOpenAPI.framework');
   var project_dir = path.join(__dirname);
   var project_relative = path.relative(project_dir, frameworkPath);
     project.parse(function (error) {
       if (error) {
         console.log('xcode project error is', error);
       } else {
-        var target = project.getFirstTarget().uuid;        
+        var target = project.getFirstTarget().uuid;
         var file = new pbxFile(project_relative,{customFramework: true, target:target});
         file.uuid = project.generateUuid();
         file.fileRef = project.generateUuid();
@@ -170,7 +170,7 @@ function addFrameworkAndSearchPath() {
          project.addToFrameworksPbxGroup(file);         // PBXGroup
          project.addToPbxFrameworksBuildPhase(file);    // PBXFrameworksBuildPhase
          //project.addToFrameworkSearchPaths(file);
-        addSearchPaths(project,'"$(SRCROOT)/../node_modules/react-native-qqsdk/ios/RCTQQSDK/**"');
+        addSearchPaths(project,'"$(SRCROOT)/../node_modules/@stonecutter/react-native-qqsdk/ios/RCTQQSDK/**"');
         fs.writeFileSync(projectPath, project.writeSync());
       }
     });

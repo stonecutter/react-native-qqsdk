@@ -10,7 +10,7 @@ import {
   CameraRoll,
   View
 } from 'react-native';
-import * as QQ from 'react-native-qqsdk';
+import * as QQ from '@stonecutter/react-native-qqsdk';
 import NavigationBar from './navigationBar';
 import resolveAssetSource from 'resolveAssetSource';
 export default class QQShare extends Component {

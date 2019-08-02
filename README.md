@@ -1,8 +1,8 @@
 # react-native-qqsdk
 [![npm](https://img.shields.io/npm/v/react-native-qqsdk.svg)](https://www.npmjs.com/package/react-native-qqsdk)
 [![npm](https://img.shields.io/npm/dm/react-native-qqsdk.svg)](https://www.npmjs.com/package/react-native-qqsdk)
-[![platform](https://img.shields.io/badge/platform-iOS%2FAndroid-lightgrey.svg?style=flat)](https://github.com/iVanPan/react-native-qqsdk)
-[![GitHub license](https://img.shields.io/github/license/mashape/apistatus.svg?style=flat)](https://github.com/iVanPan/react-native-qqsdk/blob/master/LICENSE)
+[![platform](https://img.shields.io/badge/platform-iOS%2FAndroid-lightgrey.svg?style=flat)](https://github.com/@stonecutter/react-native-qqsdk)
+[![GitHub license](https://img.shields.io/github/license/mashape/apistatus.svg?style=flat)](https://github.com/@stonecutter/react-native-qqsdk/blob/master/LICENSE)
 
 
 A React Native wrapper around the Tencent QQ SDK for Android and iOS. Provides access to QQ ssoLogin, QQ Sharing, QQ Zone Sharing etc.
@@ -45,70 +45,65 @@ A React Native wrapper around the Tencent QQ SDK for Android and iOS. Provides a
 6. checkClientInstalled   
 
 ## Installation
-```shell
-npm install --save react-native-qqsdk@latest
-```
-### RNPM
-```
- react-native link react-native-qqsdk
-```
-### CocoaPods
+
 1. Install package from npm
+
 ```shell
-npm install --save react-native-qqsdk@latest
+npm install --save @stonecutter/react-native-qqsdk@latest
+cd ios && pod install && cd ..
 ```
-2. Create a Podfile
-3. Add pod in Podfile something similar to this:
-```shell
-pod 'React', :path => '../node_modules/react-native', :subspecs => [
-  'Core',
-  'CxxBridge',
-  'RCTText',
-  'RCTNetwork',
-  'RCTImage',
-  'RCTWebSocket', # needed for debugging
-   # Add any other subspecs you want to use in your project
-  'DevSupport'
-]
-pod "Yoga", :path => "../node_modules/react-native/ReactCommon/yoga"
-pod "react-native-qqsdk", :path => "../node_modules/react-native-qqsdk"
+
+2. Link
+
 ```
-4. Pod install
-5. Follow step 7,8,9 in iOS Setup
-
-### Manual
-```shell
-npm install --save react-native-qqsdk@latest
+react-native link @stonecutter/react-native-qqsdk
 ```
-#### iOS Setup
 
-1. Open your app's Xcode project
+3. Add CFBundleURLTypes to project's Info.plist file.
 
-2. Find the `RCTQQSDK.xcodeproj` file within the `node_modules/react-native-qqsdk/ios` directory  and drag it into the `Libraries` node in Xcode
+```xml
+<key>CFBundleURLTypes</key>
+<array>
+  <dict>
+    <key>CFBundleURLName</key>
+    <string>qq</string>
+    <key>CFBundleURLSchemes</key>
+    <array>
+      <string>tencent101741163</string>
+    </array>
+  </dict>
+</array>
+```
 
-3. Select the project node in Xcode and select the "Build Phases" tab of your project configuration.
+4. Add LSApplicationQueriesSchemes to project's Info.plist file.
 
-4. Drag `libRCTQQSDK.a` from `Libraries/RCTQQSDK.xcodeproj/Products` into the "Link Binary With Libraries" section of your project's "Build Phases" configuration.
-
-5. Click the plus sign underneath the "Link Binary With Libraries" list and add the `libz.tbd,libiconv.tdb,libstdc++.tbd,libsqlite3.tbd,Security.framework,SystemConfiguration.framework,CoreTelephony.framework,CoreGraphics.framework` library .
-
-6. Click the plus sign underneath the "Link Binary With Libraries" list and add the TencentOpenAPI.framework which locate in `../node_modules/react-native-qqsdk/ios/RCTQQSDK`. Then Under the "Build Settings" tab of your project configuration, find the "Framework Search Paths" section and edit the value. Add a new value, `$(SRCROOT)/../node_modules/react-native-qqsdk/ios/RCTQQSDK`.
-
-7. Under the "Info" tab of your project configuration, find the "URL Types" section and add your app Id.
-
-8. Under the "Info" tab of your project configuration, add LSApplicationQueriesSchemes For QQ SDK.
-  ![Add LSApplicationQueriesSchemes](https://github.com/iVanPan/react-native-qqsdk/blob/master/asset/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-12-13%2013.47.15.png)
-9. add following code to your AppDelegate.m 
-```objectiv-c
-...
-#import <React/RCTLinkingManager.h>
-
-- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url
-  sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
-{
-  return [RCTLinkingManager application:application openURL:url
-                      sourceApplication:sourceApplication annotation:annotation];
-}
+```xml
+<key>LSApplicationQueriesSchemes</key>
+<array>
+  <string>mqqapi</string>
+  <string>mqq</string>
+  <string>mqqOpensdkSSoLogin</string>
+  <string>mqqconnect</string>
+  <string>mqqopensdkdataline</string>
+  <string>mqqopensdkgrouptribeshare</string>
+  <string>mqqopensdkfriend</string>
+  <string>mqqopensdkapi</string>
+  <string>mqqopensdkapiV2</string>
+  <string>mqqopensdkapiV3</string>
+  <string>mqzoneopensdk</string>
+  <string>wtloginmqq</string>
+  <string>wtloginmqq2</string>
+  <string>mqqwpa</string>
+  <string>mqzone</string>
+  <string>mqzonev2</string>
+  <string>mqzoneshare</string>
+  <string>wtloginqzone</string>
+  <string>mqzonewx</string>
+  <string>mqzoneopensdkapiV2</string>
+  <string>mqzoneopensdkapi19</string>
+  <string>mqzoneopensdkapi</string>
+  <string>mqzoneopensdk</string>
+</array>
 ```
 
 #### Android Setup
@@ -198,7 +193,7 @@ public class MainApplication extends Application implements ReactApplication {
 ### Usage
 ##### checkClientInstalled
 ```js
-import * as QQ from 'react-native-qqsdk';
+import * as QQ from '@stonecutter/react-native-qqsdk';
 QQ.isQQClientInstalled()
   .then(()=>{console.log('Installed')})
   .catch(()=>{console.log('not installed')});
@@ -206,7 +201,7 @@ QQ.isQQClientInstalled()
 ```
 ##### ssoLogin
 ```js
-import * as QQ from 'react-native-qqsdk';
+import * as QQ from '@stonecutter/react-native-qqsdk';
 QQ.ssoLogin()
   .then((result)=>{'result is', result})
   .catch((error)=>{console.log('error is', error)});
@@ -214,7 +209,7 @@ QQ.ssoLogin()
 ```
 ##### logout
 ```js
-import * as QQ from 'react-native-qqsdk';
+import * as QQ from '@stonecutter/react-native-qqsdk';
 QQ.logout()
   .then((result)=>{'result is', result})
   .catch((error)=>{console.log('error is', error)});
@@ -222,7 +217,7 @@ QQ.logout()
 ```
 ##### shareText
 ```js
-import * as QQ from 'react-native-qqsdk';
+import * as QQ from '@stonecutter/react-native-qqsdk';
 QQ.shareText('分享文字',QQ.shareScene.QQ)
   .then((result)=>{console.log('result is', result)})
   .catch((error)=>{console.log('error is', error)});
@@ -230,7 +225,7 @@ QQ.shareText('分享文字',QQ.shareScene.QQ)
 ```
 ##### shareImage
 ```js
-import * as QQ from 'react-native-qqsdk';
+import * as QQ from '@stonecutter/react-native-qqsdk';
 const imgUrl = 'https://y.gtimg.cn/music/photo_new/T001R300x300M000003Nz2So3XXYek.jpg';
 QQ.shareImage(imgUrl,'分享标题','分享描述',QQ.shareScene.QQ)
   .then((result)=>{console.log('result is', result)})
@@ -239,7 +234,7 @@ QQ.shareImage(imgUrl,'分享标题','分享描述',QQ.shareScene.QQ)
 ```
 ##### shareNews
 ```js
-import * as QQ from 'react-native-qqsdk';
+import * as QQ from '@stonecutter/react-native-qqsdk';
 import resolveAssetSource from 'resolveAssetSource';
 QQ.shareNews('https://facebook.github.io/react-native/',resolveAssetSource(require('./news.jpg')).uri,'分享新闻标题','分享新闻描述',QQ.shareScene.QQ)
 .then((result)=>{console.log('result is', result)})
@@ -248,7 +243,7 @@ QQ.shareNews('https://facebook.github.io/react-native/',resolveAssetSource(requi
 ```
 ##### shareAudio
 ```js
-import * as QQ from 'react-native-qqsdk';
+import * as QQ from '@stonecutter/react-native-qqsdk';
 const audioPreviewUrl = 'https://y.qq.com/portal/song/001OyHbk2MSIi4.html';
 const audioUrl = 'http://stream20.qqmusic.qq.com/30577158.mp3';
 const imgUrl = 'https://y.gtimg.cn/music/photo_new/T001R300x300M000003Nz2So3XXYek.jpg';
@@ -273,5 +268,5 @@ Feel free to contribute
                 
 ## License
 
-**react-native-qqsdk** is released under the **MIT** license. See [LICENSE](https://github.com/iVanPan/react-native-qqsdk/blob/master/LICENSE) file for more information.
+**react-native-qqsdk** is released under the **MIT** license. See [LICENSE](https://github.com/@stonecutter/react-native-qqsdk/blob/master/LICENSE) file for more information.
 
